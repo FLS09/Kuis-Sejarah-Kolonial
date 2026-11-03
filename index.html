@@ -22,7 +22,7 @@
             font-family: 'Cinzel', serif;
         }
         .glass-card {
-            background: rgba(30, 41, 59, 0.75);
+            background: rgba(30, 41, 59, 0.85);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -100,20 +100,20 @@
             <!-- SCREEN 1: HALAMAN UTAMA (LANDING) -->
             <section id="screen-start" class="text-center space-y-6 animate-card-entry">
                 <div class="py-4 space-y-3">
-                    <div class="inline-block p-4 bg-amber-500/10 rounded-full border border-amber-500/20 mb-2 animate-pop-in">
-                        <i class="fas fa-shield-halved text-5xl text-amber-400"></i>
+                    <div class="inline-block p-4 bg-amber-500/15 rounded-full border border-amber-500/30 mb-2 animate-pop-in">
+                        <i class="fas fa-landmark text-5xl text-amber-400"></i>
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Uji Pengetahuan Sejarahmu!</h2>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100 font-title">Uji Pengetahuan Sejarahmu!</h2>
                     <p class="text-slate-300 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                        Nikmati petualangan kuis interaktif dengan 10 soal <span class="text-amber-400 font-semibold">Pilihan Ganda</span> lengkap dengan ilustrasi gambar sejarah di setiap pertanyaan!
+                        Nikmati petualangan kuis interaktif dengan 10 soal <span class="text-amber-400 font-semibold">Pilihan Ganda</span> dan ilustrasi SVG bertema sejarah Nusantara yang elegan!
                     </p>
                 </div>
 
                 <!-- Modus & Fitur Ringkas -->
                 <div class="grid grid-cols-3 gap-3 text-left max-w-lg mx-auto">
                     <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700/60 text-center hover:border-amber-500/50 transition">
-                        <i class="fas fa-images text-amber-400 text-lg mb-1 block"></i>
-                        <span class="text-xs font-semibold text-slate-300">Gambar Ilustrasi</span>
+                        <i class="fas fa-shapes text-amber-400 text-lg mb-1 block"></i>
+                        <span class="text-xs font-semibold text-slate-300">Grafis SVG</span>
                     </div>
                     <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700/60 text-center hover:border-amber-500/50 transition">
                         <i class="fas fa-list-check text-amber-400 text-lg mb-1 block"></i>
@@ -135,78 +135,78 @@
             </section>
 
             <!-- SCREEN 2: GAMEPLAY KUIS -->
-        <section id="screen-quiz" class="hidden space-y-5">
-            
-            <!-- Status Topbar -->
-            <div class="space-y-2">
-                <div class="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-slate-400">
-                    <span id="quiz-progress-text">Soal 1 dari 10</span>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-amber-400 flex items-center gap-1">
-                            <i class="fas fa-fire"></i> Combo: <span id="combo-count">0</span>x
-                        </span>
-                        <span class="text-emerald-400 flex items-center gap-1">
-                            <i class="fas fa-trophy"></i> Skor: <span id="score-text">0</span>
-                        </span>
+            <section id="screen-quiz" class="hidden space-y-5">
+                
+                <!-- Status Topbar -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-slate-400">
+                        <span id="quiz-progress-text">Soal 1 dari 10</span>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-amber-400 flex items-center gap-1">
+                                <i class="fas fa-fire"></i> Combo: <span id="combo-count">0</span>x
+                            </span>
+                            <span class="text-emerald-400 flex items-center gap-1">
+                                <i class="fas fa-trophy"></i> Skor: <span id="score-text">0</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700/50">
+                        <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-emerald-400 h-2.5 rounded-full transition-all duration-500 w-0"></div>
                     </div>
                 </div>
-                
-                <!-- Progress Bar -->
-                <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700/50">
-                    <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-emerald-400 h-2.5 rounded-full transition-all duration-500 w-0"></div>
-                </div>
-            </div>
 
-            <!-- Tipe Soal Badge & Hint -->
-            <div class="flex justify-between items-center">
-                <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg text-xs font-bold uppercase tracking-wide">
-                    <i class="fas fa-check-double mr-1"></i> Pilihan Ganda
-                </span>
-                <button id="hint-btn" onclick="useHint()" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1.5 transition active:scale-95">
-                    <i class="fas fa-lightbulb"></i> Petunjuk (<span id="hint-count">2</span>)
-                </button>
-            </div>
-
-            <!-- Card Pertanyaan Utama -->
-            <div id="question-card" class="bg-slate-800/90 border border-slate-700 rounded-2xl p-4 sm:p-5 shadow-inner space-y-4 animate-card-entry">
-                <!-- Gambar/Foto Sejarah Soal -->
-                <div class="relative w-full h-52 sm:h-60 bg-slate-900 rounded-xl overflow-hidden border border-slate-700/70 flex items-center justify-center">
-                    <img id="question-img" src="" alt="Ilustrasi Sejarah" class="w-full h-full object-contain bg-black/40">
+                <!-- Tipe Soal Badge & Hint -->
+                <div class="flex justify-between items-center">
+                    <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg text-xs font-bold uppercase tracking-wide">
+                        <i class="fas fa-check-double mr-1"></i> Pilihan Ganda
+                    </span>
+                    <button id="hint-btn" onclick="useHint()" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1.5 transition active:scale-95">
+                        <i class="fas fa-lightbulb"></i> Petunjuk (<span id="hint-count">2</span>)
+                    </button>
                 </div>
 
-                <!-- Teks Pertanyaan -->
-                <h3 id="question-text" class="text-base sm:text-lg font-semibold text-slate-100 leading-relaxed">
-                    Pertanyaan akan ditampilkan di sini...
-                </h3>
-            </div>
+                <!-- Card Pertanyaan Utama -->
+                <div id="question-card" class="bg-slate-800/90 border border-slate-700 rounded-2xl p-4 sm:p-5 shadow-inner space-y-4 animate-card-entry">
+                    <!-- Ilustrasi SVG Kustom Soal -->
+                    <div id="svg-container" class="relative w-full h-36 sm:h-44 bg-slate-900/80 rounded-xl overflow-hidden border border-slate-700/70 flex items-center justify-center p-2">
+                        <!-- SVG akan dirender secara dinamis lewat JS -->
+                    </div>
 
-            <!-- Hint Text Display -->
-            <div id="hint-box" class="hidden bg-amber-950/40 border border-amber-500/40 p-3.5 rounded-xl text-xs sm:text-sm text-amber-300 flex items-start space-x-2 animate-pop-in">
-                <i class="fas fa-info-circle text-amber-400 mt-0.5"></i>
-                <span id="hint-text">...</span>
-            </div>
+                    <!-- Teks Pertanyaan -->
+                    <h3 id="question-text" class="text-base sm:text-lg font-semibold text-slate-100 leading-relaxed">
+                        Pertanyaan akan ditampilkan di sini...
+                    </h3>
+                </div>
 
-            <!-- Container Pilihan Jawaban -->
-            <div id="answers-container" class="space-y-2.5">
-                <!-- Opsi dinamis dirender via JS -->
-            </div>
+                <!-- Hint Text Display -->
+                <div id="hint-box" class="hidden bg-amber-950/40 border border-amber-500/40 p-3.5 rounded-xl text-xs sm:text-sm text-amber-300 flex items-start space-x-2 animate-pop-in">
+                    <i class="fas fa-info-circle text-amber-400 mt-0.5"></i>
+                    <span id="hint-text">...</span>
+                </div>
 
-            <!-- Rationale / Penjelasan Jawaban -->
-            <div id="explanation-box" class="hidden bg-slate-900/90 border border-slate-700 p-4 rounded-xl space-y-1 text-xs sm:text-sm animate-pop-in">
-                <div id="explanation-title" class="font-bold"></div>
-                <p id="explanation-text" class="text-slate-300 leading-relaxed"></p>
-            </div>
+                <!-- Container Pilihan Jawaban -->
+                <div id="answers-container" class="space-y-2.5">
+                    <!-- Opsi dinamis dirender via JS -->
+                </div>
 
-            <!-- Bottom Navigation -->
-            <div class="flex justify-end pt-2">
-                <button id="next-btn" onclick="nextQuestion()" class="hidden bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition shadow-lg flex items-center gap-2 text-sm uppercase tracking-wider animate-pop-in active:scale-95">
-                    <span>Lanjut Soal Berikutnya</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
-        </section>
+                <!-- Rationale / Penjelasan Jawaban -->
+                <div id="explanation-box" class="hidden bg-slate-900/90 border border-slate-700 p-4 rounded-xl space-y-1 text-xs sm:text-sm animate-pop-in">
+                    <div id="explanation-title" class="font-bold"></div>
+                    <p id="explanation-text" class="text-slate-300 leading-relaxed"></p>
+                </div>
 
-        <!-- SCREEN 3: HASIL AKHIR (RESULT) -->
+                <!-- Bottom Navigation -->
+                <div class="flex justify-end pt-2">
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition shadow-lg flex items-center gap-2 text-sm uppercase tracking-wider animate-pop-in active:scale-95">
+                        <span>Lanjut Soal Berikutnya</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SCREEN 3: HASIL AKHIR (RESULT) -->
             <section id="screen-result" class="hidden text-center space-y-6 py-4 animate-card-entry">
                 <div class="space-y-2">
                     <div id="result-icon" class="text-6xl my-3 animate-bounce">🏆</div>
@@ -246,88 +246,425 @@
         </main>
     </div>
 
-    <!-- SCRIPT LOGIKA KUIS -->
+    <!-- SCRIPT LOGIKA KUIS DAN SVG ASSETS -->
     <script>
-        // Database 10 Soal Pilihan Ganda dengan Foto Sejarah Asli
+        // Kumpulan Ilustrasi SVG bertema Sejarah Nusantara untuk setiap soal
+        const svgIllustrations = [
+            // 0. Hak Tawan Karang (Kapal & Laut)
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <path d="M0 120 Q 100 100, 200 120 T 400 120 L 400 160 L 0 160 Z" fill="#1e3a8a" opacity="0.6"/>
+                <path d="M0 135 Q 120 115, 250 135 T 400 135 L 400 160 L 0 160 Z" fill="#3b82f6" opacity="0.8"/>
+                <!-- Kapal Karam -->
+                <path d="M150 115 L190 115 L175 95 L160 95 Z" fill="#d97706"/>
+                <line x1="175" y1="95" x2="175" y2="75" stroke="#92400e" stroke-width="3"/>
+                <line x1="175" y1="85" x2="190" y2="90" stroke="#f59e0b" stroke-width="2"/>
+                <!-- Gelombang & Ikon Hukum -->
+                <text x="200" y="45" font-size="16" fill="#fde68a" font-weight="bold" text-anchor="middle">HAK TAWAN KARANG</text>
+                <text x="200" y="70" font-size="11" fill="#93c5fd" text-anchor="middle">Tradisi Kapal Terdampar di Pantai Bali</text>
+            </svg>`,
+
+            // 1. Perang Bali I / Singaraja
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <circle cx="320" cy="50" r="25" fill="#f59e0b" opacity="0.2"/>
+                <path d="M50 130 L120 80 L190 130 Z" fill="#334155"/>
+                <path d="M150 130 L220 70 L290 130 Z" fill="#475569"/>
+                <rect x="0" y="120" width="400" height="40" fill="#1e293b"/>
+                <text x="200" y="40" font-size="16" fill="#fde68a" font-weight="bold" text-anchor="middle">EKSPEDISI BULELENG (1846)</text>
+                <text x="200" y="65" font-size="11" fill="#cbd5e1" text-anchor="middle">Penaklukan Singaraja oleh Armada Kolonial</text>
+                <circle cx="100" cy="110" r="4" fill="#ef4444"/>
+                <circle cx="140" cy="105" r="4" fill="#ef4444"/>
+            </svg>`,
+
+            // 2. Benteng Jagaraga & I Gusti Ketut Jelantik
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <!-- Benteng -->
+                <rect x="60" y="60" width="120" height="70" fill="#64748b" rx="4"/>
+                <rect x="80" y="80" width="20" height="30" fill="#0f172a"/>
+                <rect x="120" y="80" width="20" height="30" fill="#0f172a"/>
+                <!-- Bendera -->
+                <line x1="120" y1="60" x2="120" y2="35" stroke="#cbd5e1" stroke-width="2"/>
+                <polygon points="120,35 145,45 120,55" fill="#ef4444"/>
+                <text x="270" y="65" font-size="15" fill="#fde68a" font-weight="bold" text-anchor="middle">BENTENG JAGARAGA</text>
+                <text x="270" y="90" font-size="11" fill="#93c5fd" text-anchor="middle">Pertahanan Gigih I Gusti Ketut Jelantik</text>
+                <text x="270" y="110" font-size="10" fill="#cbd5e1" text-anchor="middle">Memukul Mundur Belanda (1848)</text>
+            </svg>`,
+
+            // 3. Puputan (Perang Habis-habisan)
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <!-- Efek Kobaran Semangat / Puputan -->
+                <path d="M200 130 Q 180 80, 200 40 Q 220 80, 200 130 Z" fill="#f59e0b" opacity="0.3"/>
+                <path d="M170 130 Q 160 90, 175 60 Q 190 90, 170 130 Z" fill="#ef4444" opacity="0.4"/>
+                <text x="200" y="55" font-size="18" fill="#f87171" font-weight="bold" text-anchor="middle">⚔️ PUPUTAN ⚔️</text>
+                <text x="200" y="85" font-size="12" fill="#fde68a" text-anchor="middle">Perang Habis-Habisan Membela Kehormatan</text>
+                <text x="200" y="115" font-size="10" fill="#94a3b8" text-anchor="middle">Menolak Tunduk Pada Tekanan Kolonial</text>
+            </svg>`,
+
+            // 4. Puputan Badung & Kapal Sri Kumala
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <path d="M50 120 Q 200 90, 350 120 L 400 160 L 0 160 Z" fill="#1e3a8a" opacity="0.5"/>
+                <!-- Ilustrasi Kapal -->
+                <path d="M120 100 L 220 100 L 200 120 L 140 120 Z" fill="#b45309"/>
+                <rect x="150" y="80" width="40" height="20" fill="#d97706"/>
+                <text x="200" y="45" font-size="15" fill="#fde68a" font-weight="bold" text-anchor="middle">PUPUTAN BADUNG (1906)</text>
+                <text x="200" y="70" font-size="11" fill="#93c5fd" text-anchor="middle">Sengketa Insiden Kapal Sri Kumala di Sanur</text>
+            </svg>`,
+
+            // 5. Perang Banjar / Politik Suksesi
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <rect x="50" y="40" width="300" height="80" rx="8" fill="#1e293b" stroke="#334155"/>
+                <text x="200" y="70" font-size="15" fill="#fde68a" font-weight="bold" text-anchor="middle">KESULTANAN BANJAR</text>
+                <text x="200" y="95" font-size="11" fill="#f87171" text-anchor="middle">Intervensi Politik & Penolakan Monopoli Belanda</text>
+                <text x="200" y="115" font-size="10" fill="#94a3b8" text-anchor="middle">Pajak & Kerja Wajib Menyengsarakan Rakyat</text>
+            </svg>`,
+
+            // 6. Pangeran Antasari
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <circle cx="200" cy="65" r="30" fill="#334155" stroke="#f59e0b" stroke-width="2"/>
+                <path d="M160 125 C 160 100, 240 100, 240 125 Z" fill="#475569"/>
+                <text x="200" y="115" font-size="14" fill="#fde68a" font-weight="bold" text-anchor="middle">PANGERAN ANTASARI</text>
+                <text x="200" y="135" font-size="11" fill="#34d399" text-anchor="middle">"Haram Menyerah Waja Sampai Ka Puting"</text>
+            </svg>`,
+
+            // 7. Kotamara & Sungai Barito
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <path d="M0 110 Q 200 90, 400 110 L 400 160 L 0 160 Z" fill="#047857" opacity="0.6"/>
+                <!-- Benteng Rakit Apung Kotamara -->
+                <rect x="130" y="90" width="100" height="30" fill="#78350f" rx="3"/>
+                <polygon points="180,75 195,90 165,90" fill="#b45309"/>
+                <text x="200" y="45" font-size="15" fill="#fde68a" font-weight="bold" text-anchor="middle">BENTENG KOTAMARA</text>
+                <text x="200" y="70" font-size="11" fill="#6ee7b7" text-anchor="middle">Rakit Apung Pejuang Dayak & Banjar di Sungai Barito</text>
+            </svg>`,
+
+            // 8. Kiai Demang Lehman
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <circle cx="200" cy="65" r="28" fill="#334155" stroke="#cbd5e1" stroke-width="2"/>
+                <path d="M165 125 C 165 105, 235 105, 235 125 Z" fill="#475569"/>
+                <text x="200" y="112" font-size="14" fill="#fde68a" font-weight="bold" text-anchor="middle">KIAI DEMANG LEHMAN</text>
+                <text x="200" y="132" font-size="11" fill="#94a3b8" text-anchor="middle">Panglima Perang Pemberani Banjar</text>
+            </svg>`,
+
+            // 9. Akhir Perang Banjar / 1905-1906
+            `<svg viewBox="0 0 400 160" class="w-full h-full max-h-36">
+                <rect width="400" height="160" fill="#0f172a" rx="12"/>
+                <rect x="80" y="50" width="240" height="70" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+                <text x="200" y="80" font-size="15" fill="#f87171" font-weight="bold" text-anchor="middle">AKHIR KESULTANAN BANJAR</text>
+                <text x="200" y="102" font-size="11" fill="#cbd5e1" text-anchor="middle">Penghapusan Sepihak oleh Belanda (1905–1906)</text>
+            </svg>`
+        ];
+
+        // Database 10 Soal Pilihan Ganda
         const quizData = [
             {
                 question: "Tradisi kerajaan Bali yang memicu perselisihan dengan Belanda karena hak merampas muatan kapal karam di pesisir pantai dinamakan...",
                 options: ["Hak Tawan Karang", "Sistem Ngupasan", "Tradisi Suttee", "Sistem Puputan"],
                 correct: 0,
                 hint: "Tradisi hukum adat laut ini berkaitan dengan penguasaan atas kapal yang karam.",
-                explanation: "Hak Tawan Karang adalah hak istimewa raja-raja Bali untuk menyita kapal beserta isinya yang terdampar atau karam di wilayah pesisir mereka.",
-                image: "115876.jpg"
+                explanation: "Hak Tawan Karang adalah hak istimewa raja-raja Bali untuk menyita kapal beserta isinya yang terdampar atau karam di wilayah pesisir mereka."
             },
             {
                 question: "Pada Perang Bali I (1846), armada militer Belanda di bawah pimpinan Laksamana Muda E.B. van den Bosch berhasil menaklukkan kota...",
                 options: ["Denpasar", "Singaraja", "Tabanan", "Klungkung"],
                 correct: 1,
                 hint: "Kota pusat Kerajaan Buleleng di Bali Utara.",
-                explanation: "Pada Juni 1846, ekspedisi militer besar Belanda berhasil merebut Singaraja yang merupakan ibu kota Kerajaan Buleleng.",
-                image: "115871.jpg"
+                explanation: "Pada Juni 1846, ekspedisi militer besar Belanda berhasil merebut Singaraja yang merupakan ibu kota Kerajaan Buleleng."
             },
             {
                 question: "Patih Kerajaan Buleleng yang memimpin pasukan gabungan Bali dan sukses memukul mundur Belanda pada 1848 di Benteng Jagaraga adalah...",
                 options: ["Raja I Gusti Ngurah Made Agung", "I Gusti Ketut Jelantik", "Pangeran Hidayatullah II", "Tumenggung Surapati"],
                 correct: 1,
                 hint: "Pahlawan nasional Bali yang gagah berani mempertahankan Benteng Jagaraga.",
-                explanation: "I Gusti Ketut Jelantik memimpin benteng pertahanan Jagaraga dan berhasil memukul mundur serbuan pasukan Belanda pada tahun 1848.",
-                image: "115875.jpg"
+                explanation: "I Gusti Ketut Jelantik memimpin benteng pertahanan Jagaraga dan berhasil memukul mundur serbuan pasukan Belanda pada tahun 1848."
             },
             {
                 question: "Peristiwa perlawanan perang habis-habisan warga Bali hingga titik darah penghabisan demi mempertahankan kehormatan dinamakan...",
                 options: ["Puputan", "Gerilya", "Perang Sabil", "Diponegoro"],
                 correct: 0,
                 hint: "Kata dasarnya dari bahasa Bali 'Puput' yang berarti usai/habis.",
-                explanation: "Puputan adalah ikrar perang habis-habisan dalam tradisi Bali untuk membela harga diri dan kehormatan tanah air hingga gugur.",
-                image: "115872.jpg"
+                explanation: "Puputan adalah ikrar perang habis-habisan dalam tradisi Bali untuk membela harga diri dan kehormatan tanah air hingga gugur."
             },
             {
                 question: "Insiden penjarahan kapal berbendera Belanda yang memicu meletusnya perlawanan Puputan Badung pada September 1906 adalah kapal...",
                 options: ["Celebes", "Sri Kumala", "Van den Bosch", "Barito"],
                 correct: 1,
                 hint: "Diawali kata 'Sri' dan berakhiran nama bunga.",
-                explanation: "Kapal Sri Kumala yang terdampar di pantai Sanur diklaim dirampas, dan penolakan Raja Badung membayar ganti rugi menyulut ekspedisi militer Belanda.",
-                image: "115876.jpg"
+                explanation: "Kapal Sri Kumala yang terdampar di pantai Sanur diklaim dirampas, dan penolakan Raja Badung membayar ganti rugi menyulut ekspedisi militer Belanda."
             },
             {
                 question: "Penyebab utama timbulnya Perang Banjar (1859–1906) dari sudut pandang politik internal kesultanan adalah...",
                 options: ["Belanda secara sepihak mengangkat Sultan Tamjidillah I", "Perebutan takhta antara Pangeran Antasari dan Demang Lehman", "Larangan tambang batu bara di Martapura", "Penerapan Hak Tawan Karang di Banjarmasin"],
                 correct: 0,
                 hint: "Intervensi Belanda dengan menyingkirkan pangeran pilihan rakyat (Pangeran Hidayatullah II).",
-                explanation: "Belanda ikut campur memihak Sultan Tamjidillah I dan menyingkirkan Pangeran Hidayatullah II yang dicintai rakyat, sehingga memicu perang.",
-                image: "115874.jpg"
+                explanation: "Belanda ikut campur memihak Sultan Tamjidillah I dan menyingkirkan Pangeran Hidayatullah II yang dicintai rakyat, sehingga memicu perang."
             },
             {
                 question: "Pemimpin utama Perang Banjar yang terkenal dengan semboyan pantang menyerah 'Haram Menyerah Waja Sampai Ka Puting' adalah...",
                 options: ["Pangeran Antasari", "I Gusti Ketut Jelantik", "Sultan Tamjidillah I", "Mayjen Rost van Tonningen"],
                 correct: 0,
                 hint: "Pahlawan Nasional dari Kalimantan Selatan.",
-                explanation: "Pangeran Antasari adalah tokoh sentral Perang Banjar yang terus bergerilya bersama suku Banjar dan Dayak hingga akhir hayatnya.",
-                image: "115874.jpg"
+                explanation: "Pangeran Antasari adalah tokoh sentral Perang Banjar yang terus bergerilya bersama suku Banjar dan Dayak hingga akhir hayatnya."
             },
             {
                 question: "Pertahanan rakit apung unik yang dibuat pejuang Dayak dan Banjar di Sungai Barito untuk menghadapi kapal uap perang Belanda 'Celebes' dinamakan...",
                 options: ["Benteng Jagaraga", "Kotamara", "Suttee", "Lontar"],
                 correct: 1,
                 hint: "Satu jenis benteng apung di atas sungai.",
-                explanation: "Kotamara adalah benteng rakit apung buatan pejuang Dayak dan Banjar yang digunakan dalam pertempuran sengit di Sungai Barito pada 6 Agustus 1859.",
-                image: "115873.jpg"
+                explanation: "Kotamara adalah benteng rakit apung buatan pejuang Dayak dan Banjar yang digunakan dalam pertempuran sengit di Sungai Barito pada 6 Agustus 1859."
             },
             {
                 question: "Tokoh panglima pejuang Banjar yang ditangkap oleh Belanda dan dokumentasi fotonya saat terikat rantai menjadi saksi sejarah adalah...",
                 options: ["Kiai Demang Lehman", "Pangeran Antasari", "Raja Tabanan", "I Gusti Ketut Jelantik"],
                 correct: 0,
                 hint: "Panglima yang memiliki gelar 'Kiai'.",
-                explanation: "Kiai Demang Lehman adalah panglima perang yang gigih sebelum akhirnya dikhianati, ditangkap, dan dihukum mati oleh kolonial Belanda.",
-                image: "115878.jpg"
+                explanation: "Kiai Demang Lehman adalah panglima perang yang gigih sebelum akhirnya dikhianati, ditangkap, dan dihukum mati oleh kolonial Belanda."
             },
             {
                 question: "Perang Banjar dinyatakan berakhir sekitar tahun 1905–1906 seiring dengan tindakan Belanda berupa...",
                 options: ["Penghapusan lembaga Kesultanan Banjar secara sepihak", "Penandatanganan Perjanjian Jagaraga", "Pengangkatan kembali Pangeran Hidayatullah II", "Pembagian wilayah Kalimantan Selatan"],
                 correct: 0,
-                hint: "Belanda membubarkan institusi kerajaan Banjar.",
-                explanation: "Belanda membubarkan secara resmi Kesultanan Banjar di akhir perlawanan sekitar tahun 1905–1906 setelah sebagian besar pemimpin perjuangan gugur.",
-                image: "115881.jpg"
+                hint: "Belanda membubarkan secara resmi institusi kerajaan Banjar.",
+                explanation: "Belanda membubarkan secara resmi Kesultanan Banjar di akhir perlawanan sekitar tahun 1905–1906 setelah sebagian besar pemimpin perjuangan gugur."
             }
-     
+        ];
+
+        // State Aplikasi
+        let currentIdx = 0;
+        let score = 0;
+        let combo = 0;
+        let maxCombo = 0;
+        let correctCount = 0;
+        let hintsLeft = 2;
+        let audioEnabled = true;
+        let hasAnsweredCurrent = false;
+
+        // Simple Audio Synthesizer (Web Audio API)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(type) {
+            if (!audioEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.15); // E5
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'wrong') {
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+                    osc.frequency.exponentialRampToValueAtTime(130.81, audioCtx.currentTime + 0.2); // C3
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'click') {
+                    osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.05);
+                }
+            } catch (e) {
+                // Fail silently
+            }
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const icon = document.getElementById('audio-icon');
+            if (audioEnabled) {
+                icon.className = 'fas fa-volume-up text-lg';
+            } else {
+                icon.className = 'fas fa-volume-mute text-lg text-slate-500';
+            }
+        }
+
+        function startQuiz() {
+            playSound('click');
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-quiz').classList.remove('hidden');
+
+            currentIdx = 0;
+            score = 0;
+            combo = 0;
+            maxCombo = 0;
+            correctCount = 0;
+            hintsLeft = 2;
+
+            updateStats();
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            hasAnsweredCurrent = false;
+            const q = quizData[currentIdx];
+
+            // Re-trigger Animation Card
+            const qCard = document.getElementById('question-card');
+            qCard.classList.remove('animate-card-entry');
+            void qCard.offsetWidth; // trigger reflow
+            qCard.classList.add('animate-card-entry');
+
+            // Progress Topbar
+            document.getElementById('quiz-progress-text').innerText = `Soal ${currentIdx + 1} dari ${quizData.length}`;
+            document.getElementById('progress-bar').style.width = `${((currentIdx + 1) / quizData.length) * 100}%`;
+            document.getElementById('question-text').innerText = q.question;
+
+            // Load SVG Ilustrasi Kustom
+            document.getElementById('svg-container').innerHTML = svgIllustrations[currentIdx];
+
+            // Reset UI Boxes
+            document.getElementById('hint-box').classList.add('hidden');
+            document.getElementById('explanation-box').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+            document.getElementById('hint-count').innerText = hintsLeft;
+
+            // Render Pilihan Jawaban
+            const container = document.getElementById('answers-container');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 hover:border-amber-400 transition font-medium text-xs sm:text-sm flex justify-between items-center group animate-pop-in";
+                btn.style.animationDelay = `${idx * 0.08}s`;
+                btn.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="w-6 h-6 rounded-lg bg-slate-700 border border-slate-600 text-amber-400 flex items-center justify-center text-xs font-bold group-hover:bg-amber-500 group-hover:text-slate-950 transition">
+                            ${String.fromCharCode(65 + idx)}
+                        </span>
+                        <span>${opt}</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-slate-500 group-hover:text-amber-400 text-xs transition"></i>
+                `;
+                btn.onclick = () => submitAnswer(idx, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function useHint() {
+            if (hintsLeft <= 0 || hasAnsweredCurrent) return;
+            hintsLeft--;
+            document.getElementById('hint-count').innerText = hintsLeft;
+            document.getElementById('hint-text').innerText = quizData[currentIdx].hint;
+            document.getElementById('hint-box').classList.remove('hidden');
+            playSound('click');
+        }
+
+        function submitAnswer(selectedIdx, btnElement) {
+            if (hasAnsweredCurrent) return;
+            hasAnsweredCurrent = true;
+
+            const q = quizData[currentIdx];
+            const isCorrect = (selectedIdx === q.correct);
+            const explanationBox = document.getElementById('explanation-box');
+            const explanationTitle = document.getElementById('explanation-title');
+            const explanationText = document.getElementById('explanation-text');
+
+            if (isCorrect) {
+                playSound('correct');
+                combo++;
+                if (combo > maxCombo) maxCombo = combo;
+                score += 10 + (combo > 1 ? combo * 2 : 0);
+                correctCount++;
+
+                btnElement.className = "w-full text-left p-3.5 sm:p-4 rounded-xl border-2 border-emerald-500 bg-emerald-950/40 text-emerald-200 font-medium text-xs sm:text-sm flex justify-between items-center animate-pop-in";
+                btnElement.innerHTML += ` <i class="fas fa-circle-check text-emerald-400 text-lg"></i>`;
+
+                explanationTitle.className = "font-bold text-emerald-400 flex items-center gap-1";
+                explanationTitle.innerHTML = `<i class="fas fa-sparkles"></i> Benar Sekali! (+${10 + (combo > 1 ? combo * 2 : 0)} Poin)`;
+            } else {
+                playSound('wrong');
+                combo = 0;
+
+                btnElement.className = "w-full text-left p-3.5 sm:p-4 rounded-xl border-2 border-red-500 bg-red-950/40 text-red-200 font-medium text-xs sm:text-sm flex justify-between items-center animate-shake";
+                btnElement.innerHTML += ` <i class="fas fa-circle-xmark text-red-400 text-lg"></i>`;
+
+                // Tunjukkan opsi jawaban yang benar
+                const container = document.getElementById('answers-container');
+                const buttons = container.querySelectorAll('button');
+                buttons[q.correct].classList.add('border-emerald-500', 'bg-emerald-950/20');
+
+                explanationTitle.className = "font-bold text-red-400 flex items-center gap-1";
+                explanationTitle.innerHTML = `<i class="fas fa-times-circle"></i> Jawaban Kurang Tepat!`;
+            }
+
+            // Disable semua pilihan
+            const container = document.getElementById('answers-container');
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => b.disabled = true);
+
+            // Tampilkan penjelasan
+            explanationText.innerText = q.explanation;
+            explanationBox.classList.remove('hidden');
+
+            updateStats();
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function updateStats() {
+            document.getElementById('score-text').innerText = score;
+            document.getElementById('combo-count').innerText = combo;
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            currentIdx++;
+            if (currentIdx < quizData.length) {
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            document.getElementById('screen-quiz').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            const accuracy = Math.round((correctCount / quizData.length) * 100);
+
+            document.getElementById('summary-score').innerText = score;
+            document.getElementById('summary-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('summary-correct').innerText = correctCount;
+            document.getElementById('summary-combo').innerText = maxCombo;
+
+            const icon = document.getElementById('result-icon');
+            const title = document.getElementById('result-title');
+            const subtitle = document.getElementById('result-subtitle');
+
+            if (accuracy >= 80) {
+                icon.innerText = "👑";
+                title.innerText = "PAHLAWAN SEJARAH!";
+                subtitle.innerText = "Luar biasa! Pemahaman sejarah Nusantara milikmu sangat sempurna!";
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            } else if (accuracy >= 50) {
+                icon.innerText = "🛡️";
+                title.innerText = "PRAJURIT TANGGUH!";
+                subtitle.innerText = "Kerja bagus! Pengetahuan sejarahmu sudah cukup solid.";
+            } else {
+                icon.innerText = "📜";
+                title.innerText = "TERUS BELAJAR!";
+                subtitle.innerText = "Jangan berkecil hati, pelajari lagi rangkuman sejarah dan coba lagi!";
+            }
+        }
+
+        function resetQuiz() {
+            playSound('click');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-start').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
